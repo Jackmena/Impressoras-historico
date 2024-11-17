@@ -3,6 +3,8 @@ package dio.projeto.java_rest_api.domain.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Historico {
 
@@ -17,7 +19,8 @@ public class Historico {
     private String descricao;
 
     @ManyToOne
-    @JoinColumn(name = "impressora_id")
+    @JoinColumn(name = "impressora_id", nullable = false)
+    @JsonIgnore
     private Impressora impressora;
 
     // Getters e Setters

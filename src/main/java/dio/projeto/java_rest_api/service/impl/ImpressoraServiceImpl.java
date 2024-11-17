@@ -18,13 +18,17 @@ public class ImpressoraServiceImpl implements ImpressoraService {
 
     @Override
     public Impressora findById(Long id) {
-        return impressoraRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Impressora não encontrada."));
+        Impressora impressora = impressoraRepository.findByIdWithHistorico(id);
+        if (impressora == null) {
+            throw new NoSuchElementException("Impressora não encontrada");
+        }
+        return impressora;
     }
 
     @Override
     public Impressora create(Impressora impressora) {
-        if(impressoraRepository.existsByImpressoraSerial(impressora.getSerie())) {
-            throw new IllegalArgumentException("Essa impressora já existe.");
+        if(impressoraRepository.existsBySerie(impressora.getSerie())) {
+            throw new IllegalArgumentException("Uma impressora com está série já existe.");
         }
         return impressoraRepository.save(impressora);
     }

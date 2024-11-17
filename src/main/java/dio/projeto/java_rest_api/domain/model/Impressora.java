@@ -1,7 +1,8 @@
 package dio.projeto.java_rest_api.domain.model;
 
-import jakarta.persistence.*;
 import java.util.List;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Impressora {
@@ -14,7 +15,7 @@ public class Impressora {
     private String modelo;
     private String serie;
 
-    @OneToMany(mappedBy = "impressora", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "impressora", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Historico> historico;
 
     // Getters e Setters
